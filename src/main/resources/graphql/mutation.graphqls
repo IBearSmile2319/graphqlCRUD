@@ -1,9 +1,10 @@
 type Mutation {
-    createBrand(name: String!, country: Country!): Brand!
-    updateBrand(id: ID!, name: String, country: Country): Brand!
+#    createBrand(name: String!, country: Country!): Brand!
+    createBrand(dto: BrandInput!): Brand!
+    updateBrand(id: ID!, dto: BrandInput!): Brand!
     deleteBrand(id: ID!): Brand!
 #    models
-    createModel(name: String!, brandId: ID!): Model!
+    createModel(dto: ModelInput!): Model!
     updateModel(id: ID!, name: String!): Model!
     deleteModel(id: ID!): Model!
 }

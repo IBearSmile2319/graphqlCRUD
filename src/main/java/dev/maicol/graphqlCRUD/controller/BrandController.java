@@ -1,5 +1,6 @@
 package dev.maicol.graphqlCRUD.controller;
 
+import dev.maicol.graphqlCRUD.dto.BrandDTO;
 import dev.maicol.graphqlCRUD.entity.Brand;
 import dev.maicol.graphqlCRUD.enums.Country;
 import dev.maicol.graphqlCRUD.service.BrandService;
@@ -28,13 +29,13 @@ public class BrandController {
     }
 
     @MutationMapping
-    public Brand createBrand(@Argument String name,@Argument Country country) {
-        return brandService.createBrand(name, country);
+    public Brand createBrand(@Argument BrandDTO dto) {
+        return brandService.createBrand(dto);
     }
 
     @MutationMapping
-    public Brand updateBrand(@Argument Long id,@Argument String name,@Argument Country country) {
-        return brandService.updateBrand(id, name, country);
+    public Brand updateBrand(@Argument Long id, @Argument BrandDTO dto) {
+        return brandService.updateBrand(id, dto);
     }
 
     @MutationMapping

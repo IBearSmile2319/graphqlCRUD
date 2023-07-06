@@ -1,5 +1,6 @@
 package dev.maicol.graphqlCRUD.service;
 
+import dev.maicol.graphqlCRUD.dto.ModelDTO;
 import dev.maicol.graphqlCRUD.entity.Brand;
 import dev.maicol.graphqlCRUD.entity.Model;
 import dev.maicol.graphqlCRUD.repository.BrandRepository;
@@ -25,9 +26,9 @@ public class ModelService {
         return modelRepository.findById(id).orElse(null);
     }
 
-    public Model createModel(String name, Long brandId) {
-        Brand brand = brandRepository.findById(brandId).orElseThrow(() -> new RuntimeException("id no existe"));
-        Model model = Model.builder().name(name).brand(brand).build();
+    public Model createModel(ModelDTO modelDTO) {
+        Brand brand = brandRepository.findById(modelDTO.getBrand_id()).orElseThrow(() -> new RuntimeException("id no existe"));
+        Model model = Model.builder().name(modelDTO.getName()).brand(brand).build();
         return modelRepository.save(model);
     }
 

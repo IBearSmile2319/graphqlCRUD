@@ -3,3 +3,8 @@ type Model {
     name: String!
     brand: Brand!
 }
+
+input ModelInput {
+    name: String!
+    brand: ID!
+}

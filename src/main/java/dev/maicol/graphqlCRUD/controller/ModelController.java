@@ -1,5 +1,6 @@
 package dev.maicol.graphqlCRUD.controller;
 
+import dev.maicol.graphqlCRUD.dto.ModelDTO;
 import dev.maicol.graphqlCRUD.entity.Model;
 import dev.maicol.graphqlCRUD.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class ModelController {
     }
 
     @MutationMapping
-    public Model createModel(@Argument String name, @Argument Long brandId) {
-        return modelService.createModel(name, brandId);
+    public Model createModel(@Argument ModelDTO dto) {
+        return modelService.createModel(dto);
     }
 
     @MutationMapping
