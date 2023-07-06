@@ -1,0 +1,15 @@
+type Brand {
+#    @Id
+#@GeneratedValue(strategy = GenerationType.IDENTITY)
+#private Long id;
+#private String name;
+#@Enumerated(EnumType.STRING)
+#private Country country;
+#@OneToMany(mappedBy = "brand")
+#private List<Model> models;
+
+    id: ID!
+    name: String!
+    country: Country!
+    models: [Model!]!
+}

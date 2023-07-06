@@ -1,0 +1,5 @@
+type Model {
+    id: ID!
+    name: String!
+    brand: Brand!
+}

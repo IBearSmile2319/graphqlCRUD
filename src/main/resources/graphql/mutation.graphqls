@@ -1,0 +1,9 @@
+type Mutation {
+    createBrand(name: String!, country: Country!): Brand!
+    updateBrand(id: ID!, name: String, country: Country): Brand!
+    deleteBrand(id: ID!): Brand!
+#    models
+    createModel(name: String!, brandId: ID!): Model!
+    updateModel(id: ID!, name: String!): Model!
+    deleteModel(id: ID!): Model!
+}

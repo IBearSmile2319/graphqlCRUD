@@ -1,0 +1,7 @@
+type Query {
+    findAllBrands: [Brand]
+    findBrandById(id: ID!): Brand
+    # models
+    findAllModels: [Model]
+    findModelById(id: ID!): Model
+}
