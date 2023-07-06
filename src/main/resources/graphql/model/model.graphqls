@@ -6,5 +6,5 @@ type Model {
 
 input ModelInput {
     name: String!
-    brand: ID!
+    brand_id: ID!
 }

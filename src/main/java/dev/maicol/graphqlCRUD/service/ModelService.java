@@ -26,9 +26,9 @@ public class ModelService {
         return modelRepository.findById(id).orElse(null);
     }
 
-    public Model createModel(ModelDTO modelDTO) {
-        Brand brand = brandRepository.findById(modelDTO.getBrand_id()).orElseThrow(() -> new RuntimeException("id no existe"));
-        Model model = Model.builder().name(modelDTO.getName()).brand(brand).build();
+    public Model createModel(ModelDTO dto) {
+        Brand brand = brandRepository.findById(dto.getBrand_id()).orElseThrow(() -> new RuntimeException("id no existe"));
+        Model model = Model.builder().name(dto.getName()).brand(brand).build();
         return modelRepository.save(model);
     }
 

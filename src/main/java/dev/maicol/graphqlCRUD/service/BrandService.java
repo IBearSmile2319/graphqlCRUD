@@ -2,7 +2,6 @@ package dev.maicol.graphqlCRUD.service;
 
 import dev.maicol.graphqlCRUD.dto.BrandDTO;
 import dev.maicol.graphqlCRUD.entity.Brand;
-import dev.maicol.graphqlCRUD.entity.Model;
 import dev.maicol.graphqlCRUD.enums.Country;
 import dev.maicol.graphqlCRUD.repository.BrandRepository;
 import dev.maicol.graphqlCRUD.repository.ModelRepository;
@@ -10,6 +9,8 @@ import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -48,6 +49,16 @@ public class BrandService {
         return brand;
     }
 
+    //    suscription
+
+    public Flux<Brand> findAllBrandsFlux() {
+        return Flux.fromStream(brandRepository.findAll().stream())
+                .delayElements(java.time.Duration.ofSeconds(1)).take(10);
+    }
+
+    public Mono<Brand> findByIdMono(Long id) {
+        return Mono.justOrEmpty(brandRepository.findById(id));
+    }
 
     @PostConstruct
     private void loadData(){

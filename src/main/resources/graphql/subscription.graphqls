@@ -1,0 +1,5 @@
+type Subscription {
+    findAllBrandsFlux: Brand
+    findByIdMono(id: ID!): Brand
+    findBrandByIdFlux(id: ID!): Brand
+}
