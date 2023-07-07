@@ -66,6 +66,12 @@
 			<artifactId>graphql-java-extended-validation</artifactId>
 			<version>20.0</version>
 		</dependency>
+<!--		probando-->
+		<dependency>
+			<groupId>com.graphql-java-kickstart</groupId>
+			<artifactId>graphql-spring-boot-starter</artifactId>
+			<version>5.10.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
