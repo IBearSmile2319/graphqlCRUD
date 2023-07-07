@@ -28,10 +28,12 @@ public class BrandService {
     }
 
     public Brand findById(Long id) {
-        return brandRepository.findById(id).orElse(null);
+
+        return brandRepository.findById(id).orElseThrow(() -> new RuntimeException("id no existe"));
     }
 
     public Brand createBrand(BrandDTO brandDTO) {
+
         Brand brand = Brand.builder().name(brandDTO.getName()).country(brandDTO.getCountry()).build();
         return brandRepository.save(brand);
     }
@@ -57,7 +59,8 @@ public class BrandService {
     }
 
     public Mono<Brand> findByIdMono(Long id) {
-        return Mono.justOrEmpty(brandRepository.findById(id));
+        return Mono.justOrEmpty(brandRepository.findById(id))
+                .switchIfEmpty(Mono.error(new RuntimeException("id no existe")));
     }
 
     @PostConstruct
