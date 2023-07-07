@@ -33,9 +33,13 @@ public class BrandService {
     }
 
     public Brand createBrand(BrandDTO brandDTO) {
-
-        Brand brand = Brand.builder().name(brandDTO.getName()).country(brandDTO.getCountry()).build();
-        return brandRepository.save(brand);
+        try {
+            Brand brand = Brand.builder().name(brandDTO.getName()).country(brandDTO.getCountry()).build();
+            return brandRepository.save(brand);
+        } catch (Exception e) {
+            log.error("Error al crear la marca: {}", e.getMessage());
+            throw new RuntimeException("Error al crear la marca");
+        }
     }
 
     public Brand updateBrand(Long id, BrandDTO brandDTO) {

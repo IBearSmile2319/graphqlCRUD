@@ -1,3 +1,5 @@
+directive @NotBlank(message: String = "Property cannot be blank") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION | FIELD_DEFINITION
+
 type Brand {
     id: ID!
     name: String!
@@ -6,6 +8,6 @@ type Brand {
 }
 
 input BrandInput {
-    name: String!
-    country: Country!
+    name: String @NotBlank
+    country: Country
 }
