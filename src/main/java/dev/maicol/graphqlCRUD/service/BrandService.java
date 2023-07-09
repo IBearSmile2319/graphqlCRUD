@@ -3,6 +3,7 @@ package dev.maicol.graphqlCRUD.service;
 import dev.maicol.graphqlCRUD.dto.BrandDTO;
 import dev.maicol.graphqlCRUD.entity.Brand;
 import dev.maicol.graphqlCRUD.enums.Country;
+import dev.maicol.graphqlCRUD.publisher.BrandPublisher;
 import dev.maicol.graphqlCRUD.repository.BrandRepository;
 import dev.maicol.graphqlCRUD.repository.ModelRepository;
 import jakarta.annotation.PostConstruct;
@@ -23,19 +24,30 @@ public class BrandService {
     @Autowired
     ModelRepository modelRepository;
 
+    @Autowired
+    BrandPublisher brandPublisher;
+
     public List<Brand> findAllBrands() {
         return brandRepository.findAll();
     }
 
     public Brand findById(Long id) {
 
-        return brandRepository.findById(id).orElseThrow(() -> new RuntimeException("id no existe"));
+        Brand brand = brandRepository.findById(id).orElseThrow(() -> new RuntimeException("id no existe"));
+
+        return brand;
     }
 
     public Brand createBrand(BrandDTO brandDTO) {
         try {
             Brand brand = Brand.builder().name(brandDTO.getName()).country(brandDTO.getCountry()).build();
-            return brandRepository.save(brand);
+//            brandRepository.save(brand);
+            Brand NewBrand = brandRepository.save(brand);
+            brandPublisher.publish(NewBrand);
+            return NewBrand;
+
+
+
         } catch (Exception e) {
             log.error("Error al crear la marca: {}", e.getMessage());
             throw new RuntimeException("Error al crear la marca");

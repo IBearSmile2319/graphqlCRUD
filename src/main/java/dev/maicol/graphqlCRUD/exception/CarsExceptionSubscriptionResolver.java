@@ -23,11 +23,13 @@ public class CarsExceptionSubscriptionResolver extends SubscriptionExceptionReso
 
             @Override
             public List<SourceLocation> getLocations() {
+                log.error("Error Subscription Location: {}", exception.getMessage());
                 return null;
             }
 
             @Override
             public ErrorClassification getErrorType() {
+                log.error("Error Subscription Type: {}", exception.getMessage());
                 return null;
             }
         };

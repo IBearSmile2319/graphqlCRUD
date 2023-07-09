@@ -16,6 +16,7 @@ public class CarsExceptionHandler extends DataFetcherExceptionResolverAdapter {
 
     @Override
     protected GraphQLError resolveToSingleError(Throwable ex, DataFetchingEnvironment env) {
+
         return new GraphQLError() {
             @Override
             public String getMessage() {

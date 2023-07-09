@@ -1,9 +1,13 @@
 package dev.maicol.graphqlCRUD.controller;
 
+import dev.maicol.graphqlCRUD.context.CustomGraphQLContext;
 import dev.maicol.graphqlCRUD.dto.BrandDTO;
 import dev.maicol.graphqlCRUD.entity.Brand;
 import dev.maicol.graphqlCRUD.enums.Country;
+import dev.maicol.graphqlCRUD.publisher.BrandPublisher;
 import dev.maicol.graphqlCRUD.service.BrandService;
+import graphql.schema.DataFetchingEnvironment;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -13,9 +17,11 @@ import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Clock;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class BrandController {
 
     @Autowired
@@ -27,7 +33,11 @@ public class BrandController {
     }
 
     @QueryMapping
-    public Brand findBrandById(@Argument Long id) {
+    public Brand findBrandById(@Argument Long id, DataFetchingEnvironment environment) {
+//        CustomGraphQLContext context = environment.getContext();
+//        log.info("context: {}", context);
+        var context = environment.getContext();
+        log.info("context: {}", context);
         return brandService.findById(id);
     }
 
