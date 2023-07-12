@@ -6,9 +6,13 @@ import graphql.language.SourceLocation;
 import graphql.schema.DataFetchingEnvironment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.graphql.execution.DataFetcherExceptionResolverAdapter;
+import org.springframework.graphql.execution.ErrorType;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 @Slf4j
@@ -31,8 +35,16 @@ public class CarsExceptionHandler extends DataFetcherExceptionResolverAdapter {
 
             @Override
             public ErrorClassification getErrorType() {
-                return null;
+                return ErrorType.BAD_REQUEST;
             }
+
+            @Override
+            public Map<String, Object> getExtensions() {
+                Map<String, Object> attr = new LinkedHashMap<>();
+                attr.put("message", HttpStatus.BAD_REQUEST.value());
+                return attr;
+            }
+
         };
     }
 }

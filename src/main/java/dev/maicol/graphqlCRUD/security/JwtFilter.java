@@ -23,6 +23,9 @@ public class JwtFilter extends OncePerRequestFilter {
 //        Authentication manager(authentication) -> authentication provider (jwt Verify)
 //        authentication (which is authenticated) from manager
 //        set authentication to security context
+        try{
+
+
         if (request.getHeader("Authorization") == null) {
             filterChain.doFilter(request, response);
             return;
@@ -41,6 +44,11 @@ public class JwtFilter extends OncePerRequestFilter {
             context.setAuthentication(authenticated);
             SecurityContextHolder.setContext(context);
             filterChain.doFilter(request, response);
+        }
+
+        }catch(Exception e){
+            filterChain.doFilter(request, response);
+            
         }
 
     }
