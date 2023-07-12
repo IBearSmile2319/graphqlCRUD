@@ -13,6 +13,7 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -41,8 +42,11 @@ public class BrandController {
         return brandService.findById(id);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @MutationMapping
-    public Brand createBrand(@Argument BrandDTO dto) {
+    public Brand createBrand(@Argument BrandDTO dto, DataFetchingEnvironment environment) {
+        var context = environment.getContext();
+        log.info("context: {}", context);
         return brandService.createBrand(dto);
     }
 
