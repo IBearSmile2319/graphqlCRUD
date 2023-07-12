@@ -14,4 +14,7 @@ type Mutation {
     createModel(dto: ModelInput!): Model!
     updateModel(id: ID!, name: String!): Model!
     deleteModel(id: ID!): Model!
+#    auth
+    login(dto: LoginInput!): getToken!
+    register(dto: RegisterInput!): getToken!
 }

@@ -1,0 +1,23 @@
+
+type User {
+    id: ID!
+    username: String!
+    password: String!
+    role: Role!
+}
+
+
+input LoginInput {
+    username: String!
+    password: String!
+}
+
+input RegisterInput {
+    username: String!
+    password: String!
+    role: Role!
+}
+
+type getToken {
+    token: String!
+}
