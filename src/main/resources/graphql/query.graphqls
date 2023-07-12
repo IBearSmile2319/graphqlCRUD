@@ -6,4 +6,5 @@ type Query {
     findModelById(id: ID!): Model
 #    security
 #    GenerateToken: String
+    totpGen: String
 }

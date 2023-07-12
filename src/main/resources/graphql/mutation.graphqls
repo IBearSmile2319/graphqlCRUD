@@ -17,4 +17,6 @@ type Mutation {
 #    auth
     login(dto: LoginInput!): getToken!
     register(dto: RegisterInput!): getToken!
+
+    verifyTotp(code: Int): Boolean!
 }
